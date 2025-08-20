@@ -1,0 +1,23 @@
+Lab 1
+
+Step 1: For this lab, you will ideally use VSCode or Visual Studio for editing.  I recommend installing VSCode now if you do not have either installed.
+
+Step 2: First, open "run_webgl.html" in a browser.  You should see a green rectangle.  If you do not, try a different browser.  Do not proceed until you see the green rectangle.
+
+Step 3: "run_webgl.html" creates an html canvas that is size 400x300 and executes "webgl_app.js" which sets the color of the canvas background.  
+
+Edit "webgl_app.js" (in VS Code).  The program is very simple; it retrieves a webgl2 rendering context for the canvas, then specifies a color to set the background when it is cleared, then issues a clear command.  
+
+Edit the code to change the color of the rectangle to red.  Be sure to save this file, then you can just refresh your "run_webgl.html" browser window to see the change.
+
+Step 4: Next, edit "run_webgl.html" (in VS Code) to execute "webgl_app_triangle.js" instead of "webgl_app.js". Save the file and again you can just refresh your browser window to see the effect.  You should now see a multicolored triangle in the center of the rectangle.  Do not proceed until you see the triangle.
+
+Step 5: Edit "webgl_app_triangle.js".  This is a better example of a "real" webgl program that includes a vertex shader, a fragment shader, and buffer objects for vertex and color data.  In the "drawArrays" function (the last line of code) try changing gl.TRIANGLES to be gl.LINE_LOOP and look at the results.
+
+Step 6.  Add another 2d vertex at (0.0,-0.9) onto the end of the "position" data and add another rgb color of (1.0,1.0,1.0) onto the end of the "color" data and change the last argument of gl.drawArrays() to be 4 instead of 3.  Now look at the results if you change the first argument of drawArrays to: gl.LINE_LOOP, gl.LINES, gl.TRIANGLES, gl.TRIANGLE_FAN, and gl.TRIANGLE_STRIP.  Take a screen shot (or partial screenshot) of the result for TRIANGLE_STRIP;  submit the screenshot to Lab1 on Canvas.  If you do not know how to take a screenshot on your laptop, now is a great time to learn :)
+
+Step 7.  Make sure you finish Step 6 first and submit your work!  Edit "run_webgl.html" to execute "webgl_app_indexed.js", then open webgl_app_indexed.js.  This program uses vertex indexing to draw 2 triangles.  It is identical to webgl_app_triangle.js except for the last few lines of code that create and bind an index buffer, and drawElements() is used instead of drawArray().  Try changing the indices. 
+
+We will start on 3D rendering with webgl in Lab 2.  
+
+
