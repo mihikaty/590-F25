@@ -119,7 +119,7 @@ var projectionmatrixLocation = gl.getUniformLocation(program, "projection_matrix
 // set tranformation parameters
 var translation = [0.0, 0.0, -2.0];
 var rotationx = 0;
-var rotationy = 0;
+var rotationy = 3.14/3.0;
 var rotationz = 0;
 var scale = [1, 1, 1];
 
@@ -130,10 +130,10 @@ var aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
 var focal_length = 1.0/Math.tan(fov/2.0);
 
 // USE THESE PARAMETERS TO BUILD YOUR VIEW TRANSFORM MATRICES (NOTE: THE VIEW TRANSFORM, NOT THE CAMERA TRANSFORM!)
-var camera_translation = [0.0, 0.0, 4.0];
+var camera_translation = [0.0, 0.0, 3.0];
 var camera_rotationx = 0.0;
 var camera_rotationy = 0.0;
-var camera_rotationz = 3.14/4;
+var camera_rotationz = 3.14/6;
 
 // allocate tranformation matrices
 var projectionMatrix = new Float32Array([focal_length/aspect, 0.0, 0.0, 0.0,
@@ -184,9 +184,9 @@ function draw(timestamp) {
     prev_time=current_time;
 
     //change some transform parameters to animate
-    rotationz = current_time;
-    rotationy +=  delta_time;
-    translation[0]=Math.sin(current_time);
+//    rotationz = current_time;
+//    rotationy +=  delta_time;
+//    translation[0]=Math.sin(current_time);
 
 
 // update the model transform matrices based on the transform parameters
