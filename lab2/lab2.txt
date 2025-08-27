@@ -1,0 +1,42 @@
+Lab 2
+
+In this lab, we will be implementing model transformations, perspective projection, and basic transform animation.
+
+Step 1: Edit webgl_app_2d.js in VSCode.  Note the new things in the code, and ask questions if you don't understand them:
+  * "uniform" declarations in the vertex shader
+  * model transformation math in the vertex shader.  Note that the shader language (GLSL) has vec and mat as basic types.
+  * model transformation definitions in the main program
+  * update of the "uniform" values in the main program
+
+Step 2: Try changing the values for translation, rotation, and scale (not the matrices; those are calculated from these values!) 
+Run via run_webgl.html.  Do things behave as you would expect?
+
+Step 3: Change run_webgl.html to instead run web_app_3d.js, then edit webgl_app_3d.js  This is basically the same as web_app_2d.js but 3d instead of 2d.  Note that every vertex now has 3 coordinates (xyz), and all the z values are 0.  When you run, the output should be identical to the original webgl_app_2d.js  In vertexAttributes, change the z value of the last vertex to be 0.5.  Do you see any change after you change the z value?  Is this what you would expect?
+
+Step 4: rotationz is effectively the same as rotation in the 2d case, but rotationx and rotationy are new; try changing them.  Now do you see an effect from your previous setting of the z value of the 4th vertex?
+
+Step 5: 3D can be hard to figure out, especially without shading and lighting (which we'll do later).  Moving things around can make the 3D more obvious.  
+Change run_webgl.html to run web_app_3danimation.js and try it out.  Note in the code how:
+  * transform values can be functions of time or delta time
+  * The draw function contains the code that needs to run every frame.  This is called the "draw loop" in interactive graphics.
+
+Step 6: And finally, let's add perspective projection.  Change run_webgl.html to run web_app_3dperspective.js.  So many matrices!  Note that in the code the projection matrix values are updated in the draw function based on the 4 parameters, but unlike the model transform and view transform, animating the projection transform is not very common.  Also note that the model translation now is set to -2.0 for z.  What happens if we don't do that?
+
+Step 7:  
+So far, we've been sending all these matrices to the vertex shader, and it has been multiplying them for every vertex.  This is very inefficient if you have lots of vertices.  
+web_app_3dperspective_opt.js instead multiplies all the 4x4 matrices together in the javascript code and then sends a single 4x4 matrix to the vertex shader. This is the only difference.  Since JavaScript doesn't have built-in support for 4x4 matrices, a 4x4 multiply function is defined.  Not as elegant as the shader code! 
+
+Step 8: Your assignment is to update web_app_3dcamera.js to add a View transform so as to support moving the rendering viewpoint/camera.  Without any View transform specified, it means it is effectively an identity transform.  So rendering is at effectively happening with the camera at the world origin looking along the -Z world axis (the definition for webgl cameras). 
+Write the code to:
+  * allocate, initialize, and update the necessary matrices for the View transform
+  * pass your matrices as uniform parameters to the vertex shader
+  * use your matrices in the vertex shader to correctly transform the vertices
+Submit this file to Canvas.
+
+
+Webgl is currently rasterizing the triangles for us.  For lab3 you'll be writing your own line and triangle rasterizers.
+
+
+
+
+
