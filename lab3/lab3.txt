@@ -1,0 +1,13 @@
+Lab 3
+
+In this lab, you will be implementing 2D rasterization.  webgl actually handles rasterization, but to help with understanding, I've create a framework to let you write your own.  The framework is built on top of webgl_app_3dcamera.js from Lab 2.  This is NOT an efficient way to implement rasterization; it is just for educational purposes.
+
+Step 0: Look through the code and search for the word "rasterization".  Take a look at the two rasterization support functions and make sure you understand them. Ask questions if you have them.  Also look at the code at the very end that draws the grid. Ask questions if you have them.
+
+TODO #1: Fix the rasterize_point() function.  Try the test case provided that is commented out.
+
+TODO #2: Fix the rasterize_line() function.  Try the test cases provided that are commented out.
+
+TODO #3. Implement the rasterize_filled_triangle() function.  See today's slides for help with this. Try the test case provided that is commented out.
+
+In the next lab we will shade the pixels.
