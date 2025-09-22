@@ -1,0 +1,38 @@
+Lab 4
+
+Step 1:  Start by opening "run_webgl_gouraud.html" in a browser.  
+Press the "t" key to toggle on animation.  
+It is the 8-sided die from the homework! (minus the numbers)
+Note that you can also drag the mouse to rotate the camera, or use keyboard "wasd" to move about the XZ plane.
+Pressing "h" will reset the camera back to the home starting position.
+Nothing to submit for this step.
+
+Step 2: Open "web_app_gouraud.js" and take a look at the code before changing anything.
+Note that there are 6 vertices and 8 faces, and the faces are specified using indices.
+The vertices are just like the homework, and the indices are nearly the same, except 
+the indices range from 0 to 5 instead of 1 to 6, so the triplets are all 1 less).
+Also note that the color attribute is gone from each vertex, and instead we have a normal per vertex.
+The normal are actually identical to the vertices, which is definitely not very normal...er, standard.
+But in this case, the 8-sided die is centered on the origin, with all vertices exactly 1 unit away.
+
+Currently the vertex shader is computing ambient and diffuse lighting.  Your job is to implement 
+specular component for lighting.  Search for "TODO" in the code.
+SUBMIT a screenshot from the home location and SUBMIT web_app_gouraud.js for this part.
+
+Step 3: Now open "run_webgl_phong.html" You'll notice the die is quite dark.  
+This is because only ambient is implemented in "web_app_phong.js"
+Your job is to implement diffuse and specular world-space Phong lighting for every fragment.
+Search for "TODO" in the code.
+Again, SUBMIT a screenshot from the home location and also SUBMIT web_app_phong.js
+
+Step 4: Finally, open "run_webgl_texture.html" to see the die with a texture map.
+If you look at "web_app_texture.js", you'll see the little bit of extra code that is required to do texture-mapping.
+The key part is the texture coordinates are interpolated by webgl just like our other parameters.
+I made up these texture coordinates on a whim; I'm sure you could pick better ones if you try.
+You can also add diffuse and specular lighting to the fragments shader if you like!
+But all that is required to SUBMIT is a screenshot NOT from the home location; instead move the camera to get a good
+view of the textured die so that it fills more of the screen and you can see some part of the corgi's tiny legs.
+
+
+
+
