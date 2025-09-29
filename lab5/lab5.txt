@@ -12,7 +12,7 @@ Step 4: If you click on the Game tab to the top left of the graphics window, it 
 
 Step 5: Now click on the sphere object.  Change its X and Y values to make it sit directly atop the cube.
 
-Step 6: Next click on the Light in the Hierarchy.  Try changing the color of the light to be red (255,0,0,255) and the intensity to 50.  Try hovering over the Light Z Position and adjust it; see how the light gizmo and lighting/shadows move accordingly.  Move the now bright red light to XYZ = (0,3,1) and make sure the camera is at 0,1,6 with 0,0,0 rotation then SUBMIT a screenshot of the Game view of your scene.
+Step 6: Next click on the Light in the Hierarchy.  Try changing the color of the light to be red (255,0,0,255) and the intensity to 50.  Try hovering over the Light Z Position and adjust it; see how the light gizmo and lighting/shadows move accordingly.  Move the now bright red light to XYZ = (0,3,1) and make sure the camera is at 0,1,-6 with 0,0,0 rotation then SUBMIT a screenshot of the Game view of your scene.
 
 
 Sneak peak: The first problem in Homework 3 will be to complete the Editor Essentials Mission at https://learn.unity.com/pathway/unity-essentials
