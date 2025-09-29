@@ -1,0 +1,20 @@
+Lab 5 Intro to Unity
+
+Step 1:  Pull from git, have Unity installed, and open Unity Hub.
+
+Step 2: In Unity Hub, under Projects, select Add v (next to the + New project button) and choose Add project from disk.  In the file browser, navigate to 590-F25/lab5/Unity/Lab5 and click Open.  Now, the Lab5 project should be listed under your Projects.  Click on it to launch the Unity editor; this will take several minutes as packages are loaded, scripts are compiled, and shaders are compiled (each project generates ~2GB in the Library subdirectory).  Once the Unity editor opens, if you are not using Windows you may need to select File > Build Settings and select the correct target platform.  This could take a few minutes again.
+
+Step 3: In the Unity editor, on the bottom you should see Assets > Scenes.  Double-click on the cube icon labeled SampleScene to open it.  After it loads, you should see a cube and a sphere sitting on a plane, with camera and light gizmos, and in the bottom right should be a small window labeled Cameras that shows the scene fully rendered from the point of the view of the camera gizmo.     On the upper left you should see the SampleScene scene graph Hierarchy with 5 GameObjects: Camera, Light, Cube, Sphere, and Plane.  Try clicking on the each and see info in the Inspector for each of the different objects, including a Transform for each one.  If you double click on an object, the scene view will "zoom" to that object.  Note that this does not affect the rendered view in the corner from the Camera, because the Camera object is not moving/changing (yet).
+
+If you ever want the scene view to reframe the entire scene, you can double-click on the Plane object. 
+
+Step 4: If you click on the Game tab to the top left of the graphics window, it will change the main display to the rendered view from the Camera object.  Switch back to the Scene view (the tab next to Game) and click on the Camera object in the scene graph Hierarchy.  Note the lines in the scene view showing the Camera frustum.  In the Inspector, you should see some parameters that look familiar: Transform, vertical Field of View (FOV) and near and far clip planes.  Note that the camera Position is at -6 Z and it is looking in the positive Z because Unity is left-handed. Try moving the FOV slider and see what happens.  Next, try moving the camera to Y=2 by typing a value of 2 into the Y Position in the Transform.  Hover your mouse over the Postion Y so that you see the left/right arrows appear on each side of the cursor, then hold down the mouse button and move the mouse to adjust the Y Position smoothly.  You can do this for any parameter in the editor.  Try the X Rotation.  Note that Unity applies rotations Z,X,Y just like WebGL (but the Z axis is flipped since left-handed).  What units are Rotations in?
+
+Step 5: Now click on the sphere object.  Change its X and Y values to make it sit directly atop the cube.
+
+Step 6: Next click on the Light in the Hierarchy.  Try changing the color of the light to be red (255,0,0,255) and the intensity to 50.  Try hovering over the Light Z Position and adjust it; see how the light gizmo and lighting/shadows move accordingly.  Move the now bright red light to XYZ = (0,3,1) and make sure the camera is at 0,1,6 with 0,0,0 rotation then SUBMIT a screenshot of the Game view of your scene.
+
+
+Sneak peak: The first problem in Homework 3 will be to complete the Editor Essentials Mission at https://learn.unity.com/pathway/unity-essentials
+
+There are many many more tutorials at https://unity.com/campaign/unity-6-resources if you are interested.
