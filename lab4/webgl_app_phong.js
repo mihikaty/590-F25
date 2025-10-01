@@ -19,6 +19,7 @@ const shaders = {
         in vec3 vertNormal;
 
         out vec3 fragWorldPosition;
+        out vec3 fragNormal;
     
         void main() {
             vec4 vertWorldPosition=u_modelMatrix*vec4(vertPosition,1);
@@ -30,6 +31,7 @@ const shaders = {
             vec3 worldNormal = normalize(worldNormal4.xyz);
 
             gl_Position = u_projectionMatrix* u_viewMatrix * vertWorldPosition;
+            fragNormal = worldNormal;
         }`,
 
     fs: `#version 300 es
@@ -41,13 +43,33 @@ const shaders = {
         uniform vec3 u_cameraWorldPosition;
 
         in vec3 fragWorldPosition;
+        in vec3 fragNormal;
         out vec4 outColor;
+
     
         void main() {
             vec3 fragColor = u_lightAmbient * u_matAmbient;
             // TODO implement diffuse and specular component of Phong lighting here.
             // I already provided the in parameter fragWorldPosition, which is the world-space position of the fragment, 
-            //   but you'll need another "in" parameter (which you'll need to pass from the vertex shader using "out") 
+            // but you'll need another "in" parameter (which you'll need to pass from the vertex shader using "out") 
+
+            // This is the normalized in parameter. I normalized because it is also normalized in the Gouraud shader, probably due to interpolation
+            vec3 worldNormal = normalize(fragNormal);
+            vec3 dirToLight = normalize(u_lightWorldPosition - fragWorldPosition);
+            // Have to define dirToCamera
+            vec3 dirToCamera = normalize(u_cameraWorldPosition - fragWorldPosition); 
+
+            float diffuse = dot(worldNormal, dirToLight);
+            diffuse = max(diffuse, 0.0);
+            fragColor += (u_matDiffuse * u_lightDiffuse) * diffuse;
+            float specular = 0.0;
+            if (diffuse > 0.0) {
+                // Same as in Gouraud file
+                vec3 reflection = 2.0 * dot(worldNormal, dirToLight) * worldNormal - dirToLight;
+                specular = abs(dot(reflection, dirToCamera));
+                specular = pow(specular, u_matShininess);
+            }
+            fragColor += u_matSpecular * u_lightSpecular * specular; 
             outColor = vec4(fragColor, 1);
         }`
 };
