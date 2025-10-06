@@ -1,0 +1,59 @@
+Lab 6 Breakout part1: Scripting, collision, and motion
+
+Step 1:  Pull from git, have Unity installed, and open Unity Hub.
+
+Step 2: Create a New project (+ New Project button) named "Lab6". Be sure to select Editor verson 6000.2.??? and choose the Universal 3D Template.  You may choose whatever directory you like to create it in.  Click "+ Create Project" (bottom right).  And then we wait... :)
+
+Step 3: Once the project loads, you should see a Scene named "SampleScene" with 3 GameObjects: Main Camera, Directional Light, and Global Volume.  Note the Main Camera is at (0,1,-10). Today we'll be leaving those alone and adding some new objects.
+
+Step 4: Currently, there is no geometry in the scene, not even a floor.  First, add a Plane object (GameObject->3D Object->Plane).  Adjust values if necessary so it is positioned at the World origin (0,0,0) and rename the object "Floor".  Planes are 10x10 and use a Mesh Collider; we'll come back to this later.
+
+Step 5: Now add the "Frame" for Breakout.  First, create an Empty GameObject and name it "Frame".  Make sure it is at (0,0,0).  Then select the Frame and right-click (Control-click on Mac?) to call up the Context Menu and add a Cube (3D Object->Cube).  It should be added as a child of Frame, so it should appear indented under Frame.  Add 2 more Cubes exactly the same way; they should all be indented the same under Frame.  Rename them Left Wall, Right Wall, and Ceiling.
+
+Step 6: By default Cubes are 1x1x1 and use a Box Collider.  Adjust the geometry of the cubes so that they make a reasonable frame.  Left Wall: Position (-3,3,0) and Scale (0.5, 6, 2).  Right Wall: Position (3,3,0) and Scale (0.5,6,2).  Ceiling: Position (0,6,0) and Scale (6.5, 0.5, 2).  Cubes use a Box Collider that matches the size of the Cube automatically.
+
+Step 7: Add a Paddle object.  Again a Cube, but let's not make it a child of Frame.  Make the geometry of the Paddle be Position: (0, 0.5, 0) and Scale (1.5, 0.25, 1).
+
+Step 8: Finally, let's add the Ball (3D Object->Sphere).  Again, not as a child of anything.  Make the geometry of the Sphere (0,4,0) and Scale (0.5,0.5,0.5).  Spheres have a Sphere Collider that matches the size of the Sphere.  Take a screen shot of your Game Scene to SUBMIT.
+
+Step 9: Today, we won't be adding any bricks, just the Paddle and Ball.  Press the Play button at the top of the editor to start the Game Loop.  Amazed?  Press the Stop button to stop.
+
+Step 10: Add a RigidBody component to the Ball by selecting the Ball then clicking Add Component on the bottom right then Physics->RigidBody.  Now click the Play button!  Yay movement!  But still underwhelming.  Don't forget to press the stop button.
+
+Step 11: Add a new Physics Material to your project (Assets->Create->Physics Material).  Note that it doesn't appear it the Hierarchy (because it isn't a GameObject), it appears down below tin the Assets window. Select the Physics Material and change its "Bounciness" to 0.95 and the "Bounce Combine" to Maximum.  Next select the Ball and then drag the new physics material to the Material entry for the Sphere Collider.  This is one way to associate Unity objects to each other; another is to click on the "gear" icon (the circle with a dot) next to the value and choose by from a list.    Now Press Play again.  Now we are getting somewhere!  Press stop to end the simulation.
+
+Step 12: Now we are going to move the Paddle.  Unfortunately input is a bit complicated in Unity, and there are 2 systems for handling input.  Today, we are going to use the simpler Legacy system, but unfortunately it is off by default.  To turn it on you need to change a setting in Edit->Project Settings...->Player->Other->Configuration->Active Input Handling* (choose Both).  Unity will have to restart; be sure to say Yes to saving your work.
+
+Step 13: To move the Paddle, we are going to add a New Script component to the Paddle.  Select the Paddle then Add Component->New Script (at the bottom) and name the new script PaddleScript.  If you double-click on this new script, it should open Microsoft Visual Studio so you can edit the script.  We are going to move the Paddle in the FixedUpdate() method which runs at a regular time interval and doesn't depend on graphics speed.  Add the method inside the class definition of PaddleScript:
+
+void FixedUpdate()
+{
+    float paddle_speed = 0.0f;
+    float x = transform.position.x;
+    float y = transform.position.y;
+    float z = transform.position.z;
+    if (Input.GetKey("left")) x -= paddle_speed;
+    if (Input.GetKey("right")) x += paddle_speed;
+    if (x < 0.0f) x = 0.0f;
+    if (x > 0.0f) x = 0.0f;
+    transform.position = new Vector3(x, y, z);
+}
+
+Your job is to replace all the 0.0f values in the script with values that actually make the paddle move to the left and right walls but no further.  Be sure to save your script if you want it to be used by Unity.
+
+Step 14: The final step for this lab is to add some randomness when the Ball hits the Paddle.  Add this function to your Paddle script:
+
+private void OnCollisionExit()
+{
+    GameObject ball = GameObject.Find("Ball");
+    Vector3 v = ball.GetComponent<Rigidbody>().linearVelocity;
+    ball.GetComponent<Rigidbody>().linearVelocity = new Vector3(v.x + Random.Range(-0.9f, 0.9f), v.y, 0);
+}
+
+What is this function doing?  SUBMIT your final script and a screen shot after the ball has bounced on the Paddle a few times.
+
+
+
+
+
+ 
