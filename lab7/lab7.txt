@@ -1,0 +1,90 @@
+Lab 7 Breakout part2: More scripting, sound, prefab, particle
+
+Step 1:  Open your completed Lab6 project.  You'll be starting with that.
+
+
+Step 2: Adding sound.  Add an AudioSource component to the Ball by selecting the Ball then clicking Add Component on the bottom right then Audio->AudioSource.  In the Sceneview, there will now be a speaker gizmo overlaid onto the Ball since it is an audio source.  The AudioSource component has many settings, but for now the one we care about is Audio Resource which is currently None (so no audio source).  You'll need an audio asset that you can assign to the Audio Resource.  I've provided an MP3 named boing.mp3 in the same directory as this text file.  You can either drag and drop it into your Assets window or you can right-click in the Assets window and Import New Asset...  Next, select the Ball object again and then drag and drop the new "boing" asset onto the Audio Resource value field.  (Instead of drag and drop, you should now be able to click the "gear" icon to the right of the Audio Resource value field and select the boing asset.
+
+
+Step 3: Add a New Script component to the Ball by selecting the Ball then Add Component->New Script (at the bottom) and name the new script BallScript.  If you double-click on this new script, it should open Microsoft Visual Studio so you can edit the script.  Add this code into the class definition:
+public float Volume = 3;
+private void OnCollisionEnter()
+{
+    AudioSource audio = GetComponent<AudioSource>();
+    audio.PlayOneShot(audio.clip, volume);
+}
+
+Test this out, and adjust the script's Volume variable in the editor as you see fit.  Feel free to replace the boing.mp3 audio asset with one of your one!
+
+Step 4: Next, add a single brick to the scene by adding a Cube.  Rename it Brick and place it (0,5,0) with Scale (0.5, 0.25, 0.5).  It should be directly above the Ball.    
+
+
+Step 5: Due to conservation of energy, the Ball is not likely to ever bound back up and reach the Brick.  Fix that by changing your Paddle script (PaddleScript) to amplify the Ball's Y velocity when it hits the Paddle:
+private void OnCollisionExit()
+{
+    GameObject ball = GameObject.Find("Ball");
+    Vector3 v = ball.GetComponent<Rigidbody>().linearVelocity;
+    ball.GetComponent<Rigidbody>().linearVelocity = new Vector3(v.x + Random.Range(-0.9f, 0.9f), v.y*1.2f, 0);
+}
+
+While you are at it, get rid of that Find("Ball") call by using one of the methods described today in class.
+Note that now if the Ball ever gets going to fast, it could "jump" right through the Floor or the Paddle or the Frame in one timestep.  If you ever see this happen, change a parameter on the Ball's RigidBody component so that it won't happen.
+
+
+Step 6: Next, let's make the Brick disappear when it is hit.  Add a New Script component to the Brick named BrickScript and add an empty OnCollisionExit() to the class definition.  The easiest way to make the Brick disappear is to call the GameObject method SetActive(false).  This will effectively cause it to cease to exist, because it will no longer be rendered and none of its components will be active.  Add the code to deactivate the Brick.  Hint: the MonoBehaviour script has a reference to the GameObject it belongs to.  Hint2: Unity likes camelCase.
+
+
+Step 7: Let's add a particle effect when the Brick disappears.  To do this, first add a Particle System into the scene using GameObject->Effects->Particle System and name it Explosion.  
+Set Position to (0,0,0) and Rotation to (0,0,0) and then change the following values for the Particle System component:
+Duration: 2
+Start Lifetime: 5
+Simulation Speed: 10
+Play On Awake (uncheck)
+Max Particles: 100
+And finally, uncheck Looping at the top.
+
+Then add this code to the beginning of BrickScript's OnCollisionExit() function:
+
+   GameObject particles=GameObject.Find("Explosion");
+   if (particles)
+   {
+      particles.transform.SetPositionAndRotation(transform.position, transform.rotation);
+      particles.transform.localScale = transform.localScale;
+      ParticleSystem ps = particles.GetComponent<ParticleSystem>();
+      ps.Play();
+   }
+
+   (You are welcome to get rid of this Find() call as well.)
+
+
+Step 8: Nearly there!  The last thing to do is add at least 10 more bricks!  It would be painful to add each brick by hand, so time for a Prefab!  Drag your Brick object and drop it into the Assets window.  And now you have a Brick Prefab!  Test it out by dragging the Brick prefab from your Assets window and dropping it into your Hierarchy window.  You should see Brick (1) with a prefab icon (the filled in cube).  Set the Position of Brick (1) to be (0.5, 5, 0).  It should be right next to the other brick, with no gap.  Test it out.
+
+
+Step 9: While you could use the editor to create many more bricks, let's instead create all the bricks programmatically.  Hmm, where to do this.  Many games have a special empty GameObject where they put these kinds of scripts, but you could also do it as part of the Frame, or the Floor.  You can decide which to use, but in any case the code should go in the Start() function of the script.  Try this code out:
+
+    public GameObject BrickPrefab;
+    void Start()
+    {
+        if (BrickPrefab) {
+            for (int y = 0; y < 3; y++)
+            {
+                for (int x = 0; x < 4; x++)
+                {
+                    GameObject b = Instantiate(BrickPrefab, new Vector3(-2.5f + 0.5f * x, 4.5f + y * 0.25f, 0), Quaternion.identity);
+                    if (y == 0) b.GetComponent<MeshRenderer>().material.color = Color.blue;
+                    if (y == 1) b.GetComponent<MeshRenderer>().material.color = Color.red;
+                    if (y == 2) b.GetComponent<MeshRenderer>().material.color = Color.green;
+                }
+            }
+        }
+    }
+
+Make sure to drag and drop your Brick prefab from your Assets window to the script's BrickPrefab value (no using Find() this time!)
+Fix the code so the bricks go all the way across the frame.  And be sure to remove Brick and Brick (1) from the Hiearchy window; you don't need them any more!
+
+SUBMIT a screenshot while running of the your Unity window with the Game window showing.  Also SUBMIT all the scripts for the project (Ball, Brick, Paddle, and whatever you used for Step 9.
+ 
+
+
+
+ 
