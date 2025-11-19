@@ -1,0 +1,50 @@
+Lab 10  Mixed Reality
+
+READ THROUGH ALL THE STEPS BEFORE STARTING so you know what things to explore while in MR!!!  And before doing any particular step, read the QUESTIONS associated with that step!  (You can also ask your partner to read the instructions/questions to you while you are in MR.
+
+
+Step 1: Use the Meta Quest Developer Hub File Manager to install (copy) MRValemMQDH.apk and MRmultiplayer.apk onto your USB-connected Quest (File Manager, On Device, Apps).  Once you are done, disconnect your USB cable.
+
+
+Step 2: Before we can use these applications, we need to scan the room's static geometry.  Separately, taking turns with your partner, each of you do a scan of the room (or part of the room, including a desk) using Environment Setup -> Space Setup from the Quest settings.
+
+QUESTIONS:  
+1. Did the scanning seem to have any trouble scanning the room?  
+2. Did it find any models besides just the overall scene mesh?  You   and your partner may have different experiences. 
+
+
+Step 3: You can do the rest of the experiences seated if you wish, but you need to be in the area that you scanned.  Run MRValemMQDH from inside the Quest by clicking on "App Library" (the right-most icon in the menu bar) and select "Unknown sources“ on the left (the folder with a question mark).  Answer yes to any dialogs that appear.
+
+QUESTIONS: 
+3. What virtual objects do you see?  
+4. Use either thumbstick to move the blue character, and X or A to make it jump.  Try jumping on real and virtual things, and describe what happens for different objects.
+5. Hold your arm in out in front of one of the virtual objects; does your arm seem to be in front of the virtual object or behind?
+
+
+Step 4: Exit the experience by pressing the Meta button, and let your partner do Step 3.
+
+
+Step 5: Now run MRmultiplayer from Unknown sources.  Once inside the MR application, click through the initial instructions.  Before doing anything else, try moving the virtual table and clicking the MR and VR and AR buttons on the left corner.
+
+QUESTIONS:
+6. Describe what the AR, MR, and VR buttons do.
+
+
+Step 6: Change your name, or just press "Confirm", then select "Host Table" then "Host".  Press the "Games" button and play one of the games.
+
+QUESTIONS:
+7. Describe the game you played, and what was possible to do in it.
+
+
+Step 7: Exit the application, and let your partner try Step 5 and Step 6.
+
+
+Step 8: Optional: try to connect to another team by providing/receiving a table code with another team, or use the table code Professor Marks shares in class to join his table.
+
+
+SUBMIT your answers to all 7 questions.
+ 
+
+
+
+ 
